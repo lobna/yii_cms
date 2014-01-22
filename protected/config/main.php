@@ -1,7 +1,6 @@
 <?php
 
 // uncomment the following to define a path alias
-Yii::setPathOfAlias('assets','/var/www/yii_cms/assets/');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
@@ -23,13 +22,13 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>false,
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
+		'admin',
 		
 	),
 
@@ -37,7 +36,10 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			// 'allowAutoLogin'=>true,
+			'authTimeout' => 86400,
+            'class' => 'WebUser',
+            'loginUrl'=>array('site/index'),
 		),
 		// uncomment the following to enable URLs in path-format
 		
@@ -56,13 +58,19 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=yii_cms',
+			'connectionString' => 'mysql:host=localhost;dbname=demobyte_demoProject',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'demobyte_cms',
+			'password' => 'PtdJabSB4Iy.',
 			'charset' => 'utf8',
 		),
-		
+		// 'db'=>array(
+		// 	'connectionString' => 'mysql:host=localhost;dbname=yii_cms',
+		// 	'emulatePrepare' => true,
+		// 	'username' => 'root',
+		// 	'password' => '',
+		// 	'charset' => 'utf8',
+		// ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

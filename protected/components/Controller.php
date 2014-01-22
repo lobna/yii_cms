@@ -20,4 +20,47 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+	    public function accessRules() {
+        $user_id = Yii::app()->user->getId();
+        $controller_name = Yii::app()->getController()->getId();
+        $action_name = Yii::app()->controller->action->id;   
+
+    
+        if ( $user_id >  0) {
+            if(Yii::app()->user->isAdmin()){
+                return array(
+                    array('allow',
+                        'controllers'=>array('admin/product','admin/slider','admin/category','admin/user','gii'),
+                        'users'=>array('*'),
+                    ),array('deny',  // deny all users
+                        'controllers'=>array(/*'clientprofile'*/),
+                        'users'=>array('*'),
+                    )
+                );
+            }
+            elseif(Yii::app()->user->isEditor()){
+            	return array(
+                    array('allow',
+                        'controllers'=>array('*'),
+                        'users'=>array('*'),
+                    ),array('deny',  // deny all users
+                        'controllers'=>array('admin/user'),
+                        'users'=>array('*'),
+                    )
+                
+                );
+            }
+            else{
+            	 return array(
+                    array('allow',
+                        'controllers'=>array('site','products','gii'),
+                        'users'=>array('*'),
+                    )
+                );
+            }
+            
+        }
+        
+    }
 }

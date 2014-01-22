@@ -15,35 +15,9 @@ class SliderController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		return array(
-			// array('allow',  // allow all users to perform 'index' and 'view' actions
-			// 	'actions'=>array('index','view'),
-			// 	'users'=>array('*'),
-			// ),
-			// array('allow', // allow authenticated user to perform 'create' and 'update' actions
-			// 	'actions'=>array('create','update'),
-			// 	'users'=>array('@'),
-			// ),
-			// array('allow', // allow admin user to perform 'admin' and 'delete' actions
-			// 	'actions'=>array('admin','delete'),
-			// 	'users'=>array('admin'),
-			// ),
-			// array('deny',  // deny all users
-			// 	'users'=>array('*'),
-			// ),
-		 );
-	}
 
 	/**
 	 * Displays a particular model.
@@ -62,14 +36,14 @@ class SliderController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Slider;
+		$model=new HomeSlider;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Slider']))
+		if(isset($_POST['HomeSlider']))
 		{
-			$model->attributes=$_POST['Slider'];
+			$model->attributes=$_POST['HomeSlider'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -91,9 +65,9 @@ class SliderController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Slider']))
+		if(isset($_POST['HomeSlider']))
 		{
-			$model->attributes=$_POST['Slider'];
+			$model->attributes=$_POST['HomeSlider'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -122,7 +96,7 @@ class SliderController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Slider');
+		$dataProvider=new CActiveDataProvider('HomeSlider');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +107,10 @@ class SliderController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Slider('search');
+		$model=new HomeSlider('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Slider']))
-			$model->attributes=$_GET['Slider'];
+		if(isset($_GET['HomeSlider']))
+			$model->attributes=$_GET['HomeSlider'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,7 +121,7 @@ class SliderController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Slider the loaded model
+	 * @return HomeSlider the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
@@ -160,7 +134,7 @@ class SliderController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Slider $model the model to be validated
+	 * @param HomeSlider $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{

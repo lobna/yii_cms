@@ -1,6 +1,6 @@
 <?php
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -24,27 +24,7 @@ class ProductController extends Controller
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	// public function accessRules()
-	// {
-	// 	return array(
-	// 		array('allow',  // allow all users to perform 'index' and 'view' actions
-	// 			'actions'=>array('index','view'),
-	// 			'users'=>array('*'),
-	// 		),
-	// 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-	// 			'actions'=>array('create','update'),
-	// 			'users'=>array('@'),
-	// 		),
-	// 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
-	// 			'actions'=>array('admin','delete'),
-	// 			'users'=>array('admin'),
-	// 		),
-	// 		array('deny',  // deny all users
-	// 			'users'=>array('*'),
-	// 		),
-	// 	);
-	// }
-
+	
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -62,14 +42,14 @@ class ProductController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Product;
+		$model=new Category;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Product']))
+		if(isset($_POST['Category']))
 		{
-			$model->attributes=$_POST['Product'];
+			$model->attributes=$_POST['Category'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -91,9 +71,9 @@ class ProductController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Product']))
+		if(isset($_POST['Category']))
 		{
-			$model->attributes=$_POST['Product'];
+			$model->attributes=$_POST['Category'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -122,7 +102,7 @@ class ProductController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Product');
+		$dataProvider=new CActiveDataProvider('Category');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +113,10 @@ class ProductController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Product('search');
+		$model=new Category('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Product']))
-			$model->attributes=$_GET['Product'];
+		if(isset($_GET['Category']))
+			$model->attributes=$_GET['Category'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,12 +127,12 @@ class ProductController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Product the loaded model
+	 * @return Category the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Product::model()->findByPk($id);
+		$model=Category::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -160,41 +140,14 @@ class ProductController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Product $model the model to be validated
+	 * @param Category $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='product-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='category-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-
-	public function actionUpload()
-    {
-
-        $tempFolder=Yii::getPathOfAlias('webroot').'/assets/upload/temp/';
-
-        // mkdir($tempFolder, 0777, TRUE);
-        // mkdir($tempFolder.'chunks', 0777, TRUE);
-
-        Yii::import("ext.EFineUploader.qqFileUploader");
-
-        $uploader = new qqFileUploader();
-        $uploader->allowedExtensions = array('jpg','jpeg','png');
-        $uploader->sizeLimit = 4 * 1024 * 1024;//maximum file size in bytes
-        $uploader->chunksFolder = $tempFolder.'chunks';
-
-        $result = $uploader->handleUpload($tempFolder);
-        $result['filename'] = $uploader->getUploadName();
-        // $result['folder'] = $webFolder;
-       
-        $uploadedFile=$tempFolder.$result['filename'];
-
-        header("Content-Type: text/plain");
-        $result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
-        echo $result;
-        Yii::app()->end();
-        }
 }

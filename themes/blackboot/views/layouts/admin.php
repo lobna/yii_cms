@@ -47,16 +47,22 @@
 				</a>
 				<a class="brand" href="#"><?php echo Yii::app()->name ?></a>
 				<div class="nav-collapse">
+					<?php 
+						$items =array();
+						if(Yii::app()->user->isAdmin())
+							$items [] = array('label'=>'Users', 'url'=>array('/admin/user/admin'));
+
+						$items [] = array('label'=>'Categories', 'url'=>array('/admin/category/admin'));
+						$items [] = array('label'=>'Homepage Slider', 'url'=>array('/admin/slider/admin'));
+						$items [] = array('label'=>'Products', 'url'=>array('/admin/product/admin'));
+						$items [] = array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest);
+						$items [] = array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
+
+					?>
 					<?php $this->widget('zii.widgets.CMenu',array(
 						'htmlOptions' => array( 'class' => 'nav' ),
 						'activeCssClass'	=> 'active',
-						'items'=>array(
-							array('label'=>'Products', 'url'=>array('/admin/product')),
-							array('label'=>'Homepage Slider', 'url'=>array('/admin/slider')),
-							// array('label'=>'Categories', 'url'=>array('/admin/categories')),
-							array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-						),
+						'items'=> $items,
 					)); ?>
 					
 				</div><!--/.nav-collapse -->
@@ -97,10 +103,10 @@
 	  <div class="container">
 		<div class="row">
 			<div id="footer-copyright" class="col-md-6">
-				About us | Contact us | Terms & Conditions
+				
 			</div> <!-- /span6 -->
 			<div id="footer-terms" class="col-md-6">
-				© 2012-13 Black Bootstrap. <a href="http://nachi.me.pn" target="_blank">Nachi</a>.
+				© 2012-13 Lobna. <a href="http://byteis.com" target="_blank">Byteis</a>.
 			</div> <!-- /.span6 -->
 		 </div> <!-- /row -->
 	  </div> <!-- /container -->

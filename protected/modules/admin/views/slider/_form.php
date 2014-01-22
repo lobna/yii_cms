@@ -46,13 +46,13 @@
 			                       'retry'=>array('enableAuto'=>true,'preventRetryResponseProperty'=>true),
 			                       'chunking'=>array('enable'=>true,'partSize'=>100),//bytes
 			                       'callbacks'=>array(
-			                                        'onComplete'=>"js:function(id, name, response){ $('#Slider_image').val(response.filename) }",
+			                                        'onComplete'=>"js:function(id, name, response){ $('#HomeSlider_image').val(response.filename) }",
 			                                        'onError'=>"js:function(id, name, errorReason){ }",
 			                                         ),
 			                       'validation'=>array(
 			                                 'allowedExtensions'=>array('jpg','jpeg','png'),
-			                                 'sizeLimit'=> 4 * 1024 * 1024,//maximum file size in bytes
-			                                 'minSizeLimit'=>  1024 * 1024,// minimum file size in bytes
+			                                 'sizeLimit'=> 1 * 1024 * 1024,//maximum file size in bytes
+			                                 'minSizeLimit'=>  400,// minimum file size in bytes
 			                                          ),
 			                      )
 			      ));

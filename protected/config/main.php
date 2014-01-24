@@ -57,20 +57,20 @@ return array(
 		// ),
 		// uncomment the following to use a MySQL database
 		
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=demobyte_demoProject',
-			'emulatePrepare' => true,
-			'username' => 'demobyte_cms',
-			'password' => 'PtdJabSB4Iy.',
-			'charset' => 'utf8',
-		),
 		// 'db'=>array(
-		// 	'connectionString' => 'mysql:host=localhost;dbname=yii_cms',
+		// 	'connectionString' => 'mysql:host=localhost;dbname=demobyte_demoProject',
 		// 	'emulatePrepare' => true,
-		// 	'username' => 'root',
-		// 	'password' => '',
+		// 	'username' => 'demobyte_cms',
+		// 	'password' => 'PtdJabSB4Iy.',
 		// 	'charset' => 'utf8',
 		// ),
+		'db'=>array(
+			'connectionString' => 'mysql:host=localhost;dbname=yii_cms',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => '',
+			'charset' => 'utf8',
+		),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

@@ -40,23 +40,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'product-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
 		'name',
 		'image',
 		'description',
-		'create_time',
-		'create_user_id',
-		/*
-		'update_time',
-		'update_user_id',
-		*/
+		 array('name' => 'create_user',
+			  'value' => '$data->c_user->first_name." ".$data->c_user->last_name',
+			  'filter'=>false
+		),
+		array('name' => 'update_user',
+			  'value' => '$data->u_user->first_name." ".$data->u_user->last_name',
+			  'filter'=>false
+		),
+
 		array(
 			'class'=>'CButtonColumn',
-		),
+		)
 	),
 )); ?>

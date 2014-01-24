@@ -56,8 +56,11 @@ class User extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
+
 		return array(
-		);
+            'products'=>array(self::HAS_MANY, 'Product', 'create_user_id'),
+            // 'update_user'=>array(self::HAS_MANY, 'Product', 'update_user_id'),
+        );
 	}
 
 	/**

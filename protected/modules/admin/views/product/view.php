@@ -31,8 +31,12 @@ $this->menu=array(
         ),    
 		'description',
 		'create_time',
-		'create_user_id',
+		array('name' => 'create_user_id',
+			  'value' => isset($model->create_user)? CHtml::encode($model->create_user->first_name)." ".$model->create_user->last_name:"--"
+			  ),
 		'update_time',
-		'update_user_id',
+		array('name' => 'update_user_id',
+			  'value' => isset($model->update_user)? CHtml::encode($model->update_user->first_name." ".$model->update_user->last_name): "Unknown"
+			  ),
 	),
 )); ?>

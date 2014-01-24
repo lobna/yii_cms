@@ -132,10 +132,13 @@ class ProductController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		// $model1
 		$model=new Product('search');
 		$model->unsetAttributes();  // clear any default values
+
 		if(isset($_GET['Product']))
 			$model->attributes=$_GET['Product'];
+
 
 		$this->render('admin',array(
 			'model'=>$model,

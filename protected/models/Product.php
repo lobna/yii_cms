@@ -49,6 +49,8 @@ class Product extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'c_user' => array(self::BELONGS_TO,'User','create_user_id'),
+			'u_user' => array(self::BELONGS_TO,'User','update_user_id'),
 		);
 	}
 
@@ -63,9 +65,9 @@ class Product extends CActiveRecord
 			'image' => 'Image',
 			'description' => 'Description',
 			'create_time' => 'Create Time',
-			'create_user_id' => 'Create User',
+			'create_user' => 'Create User',
 			'update_time' => 'Update Time',
-			'update_user_id' => 'Update User',
+			'update_user' => 'Update User',
 		);
 	}
 
@@ -96,6 +98,12 @@ class Product extends CActiveRecord
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_user_id',$this->update_user_id);
 
+		$criteria->with=array(
+    		'c_user','u_user'
+		);
+
+		$criteria->together = false;
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -119,10 +127,10 @@ class Product extends CActiveRecord
     		if ($this->isNewRecord) {
     		
 				$this->create_time = date('Y-m-d H:i:s');
-				// $this->create_user_id = Yii::app()->user->id;
+				$this->create_user_id = Yii::app()->user->id;
     		}
     		$this->update_time = date('Y-m-d H:i:s');
-			// $this->update_user_id = Yii::app()->user->id;
+			$this->update_user_id = Yii::app()->user->id;
     		
     		return true;
     	}
